@@ -17,6 +17,8 @@ namespace TrashCollectorProject.Controllers
         // GET: Customers
         public ActionResult Index()
         {
+            Customer cus = new Customer();
+          
             return View(db.Customers.ToList());
         }
 
@@ -46,7 +48,7 @@ namespace TrashCollectorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,firstName,lastName,emailAddress,address")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipCode,weeklyPickupDay,specialOneTimePickup")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +80,7 @@ namespace TrashCollectorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,firstName,lastName,emailAddress,address")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipCode,weeklyPickupDay,specialOneTimePickup")] Customer customer)
         {
             if (ModelState.IsValid)
             {
