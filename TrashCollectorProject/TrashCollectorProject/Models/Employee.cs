@@ -14,5 +14,9 @@ namespace TrashCollectorProject.Models
         public string lastName { get; set; }
         public string emailAddress { get; set; }
         public string address { get; set; }
+        
+        public string zipCode { get; set; }
+        public string routeStartingPoint { get; set; }
+        public string routeEndingPoint { get; set; }
     }
 }
