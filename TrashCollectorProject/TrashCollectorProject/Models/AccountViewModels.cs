@@ -5,7 +5,7 @@ namespace TrashCollectorProject.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
+        //[Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -41,7 +41,7 @@ namespace TrashCollectorProject.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        //[Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -68,11 +68,6 @@ namespace TrashCollectorProject.Models
         public string UserName { get; set; }
 
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -90,7 +85,7 @@ namespace TrashCollectorProject.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        //[Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -111,7 +106,7 @@ namespace TrashCollectorProject.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        //[Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

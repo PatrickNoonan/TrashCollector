@@ -11,6 +11,7 @@ namespace TrashCollectorProject.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Display(Name = "First Name")]
         public string firstName { get; set; }
 
@@ -32,8 +33,11 @@ namespace TrashCollectorProject.Models
         [Display(Name = "Special One Time Pickup")]
         public string specialOneTimePickup { get; set; }
 
+        
+        [Display(Name = "User Id")]
         [ForeignKey("ApplicationUser")]
-        public string ApplicationId { get; set; }
+        public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
     }
 }
