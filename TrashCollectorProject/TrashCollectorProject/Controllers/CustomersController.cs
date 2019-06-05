@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,7 +18,7 @@ namespace TrashCollectorProject.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            Customer cus = new Customer();
+            Customer customer = new Customer();
           
             return View(db.Customers.ToList());
         }
@@ -67,6 +68,8 @@ namespace TrashCollectorProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            string currentId = User.Identity.GetUserId();
+            
             Customer customer = db.Customers.Find(id);
             if (customer == null)
             {

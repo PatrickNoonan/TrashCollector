@@ -34,10 +34,9 @@ namespace TrashCollectorProject.Models
         [Display(Name = "Route end")]
         public string routeEndingPoint { get; set; }
 
-        //[Display(Name = "Email Address")]
-
-        //[ForeignKey("ApplicationUser")]
-        //public string ApplicationId { get; set; }
-        //public ApplicationUser ApplicationUser { get; set; }
+        [Display(Name = "User Id")]
+        [ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }
