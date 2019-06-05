@@ -14,6 +14,7 @@
     <h4>Customer</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*User.Identity.GetUserId(); - grabs primary key of logged in user*@
     @Html.HiddenFor(model => model.Id)
 
     <div class="form-group">

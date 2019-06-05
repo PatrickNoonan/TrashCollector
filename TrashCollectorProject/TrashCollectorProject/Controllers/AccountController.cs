@@ -171,13 +171,13 @@ namespace TrashCollectorProject.Controllers
                     //Ends Here   
                     if (model.UserRoles == "Employee")
                     {
-                        return RedirectToAction("Index", "Employees");
+                        return RedirectToAction("Edit", "Employees");
                     }
                     else if (model.UserRoles == "Customer")
                     {
-                        return RedirectToAction("Index", "Customers");
+                        return RedirectToAction("Edit", "Customers");
                     }
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                           .ToList(), "Name", "Name");
