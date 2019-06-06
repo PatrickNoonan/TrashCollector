@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,17 +18,25 @@ namespace TrashCollectorProject.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            //var players = _context.Players.Include(m => m.Team).ToList();
+            string today = System.DateTime.Now.DayOfWeek.ToString();
+            string currentId = User.Identity.GetUserId();
+            Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
+
+
+            var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == today ).ToList();
+
+
+            return View(customers);
         }
 
-        // GET: Employees/Details/5
-        public ActionResult Details(int? id)
+        // GET: /Details/5
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employees.Find(id);
+
+            string currentId = User.Identity.GetUserId();
+
+            Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -35,22 +44,25 @@ namespace TrashCollectorProject.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Create
+        // GET: Customers/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,firstName,lastName,emailAddress,address")] Employee employee)
+        public ActionResult Create(Employee employee)
         {
             if (ModelState.IsValid)
             {
+                string currentId = User.Identity.GetUserId();
+
                 db.Employees.Add(employee);
+                employee.UserId = currentId;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

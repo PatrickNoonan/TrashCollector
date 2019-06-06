@@ -18,21 +18,15 @@ namespace TrashCollectorProject.Models
         [Display(Name = "Last Name")]
         public string lastName { get; set; }
 
-        [Display(Name = "Email Address")]
-        public string emailAddress { get; set; }
-
-        [Display(Name = "Address")]
-        public string address { get; set; }
-
         [Display(Name = "Zip Code")]
 
         public string zipCode { get; set; }
 
-        [Display(Name = "Route start")]
-        public string routeStartingPoint { get; set; }
+        [Display(Name = "City")]
+        public string city { get; set; }
 
-        [Display(Name = "Route end")]
-        public string routeEndingPoint { get; set; }
+        [Display(Name = "State")]
+        public string state { get; set; }
 
         [Display(Name = "User Id")]
         [ForeignKey("ApplicationUser")]
