@@ -4,9 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+
 <h2>Customer Home Page</h2>
 
-@*<p>
+<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -61,9 +62,14 @@
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
         @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+        @Html.ActionLink("SpecialPickup", "SpecialPickup", new { id = item.Id }) |
+        @Html.ActionLink("HoldPickup", "HoldPickup", new { id = item.Id }) |
+        @*@Html.ActionLink("Hold Pick up", "HoldPickup", "Customers", new { id = User.Identity.GetUserId() })*@
+        @Html.ActionLink("Budget", "Budget", new { id = item.Id }) 
+
     </td>
 </tr>
 }
 
-</table>*@
+</table>

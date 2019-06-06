@@ -128,5 +128,47 @@ namespace TrashCollectorProject.Controllers
             }
             base.Dispose(disposing);
         }
+        // GET: Customers/Edit/5
+        public ActionResult HoldPickup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string currentId = User.Identity.GetUserId();
+            //int customersId = db.Customers.Where(c => c.UserId == currentId).Select(db.Customers.id);
+            //var customersId = db.Customers.Single(m => m.UserId == currentId);
+            //Customer customer = db.Customers.Find(customersId);
+            var currentCustomer = db.Customers.Single(m => m.UserId == currentId);
+            //USER ID IS STILL NULL
+
+            //playerInDB.FirstName = player.FirstName;
+            //playerInDB.LastName = player.LastName;
+            //playerInDB.TeamId = player.TeamId;
+            //playerInDB.Teams = _context.Teams.ToList();
+            //_context.SaveChanges();
+            Customer customer = currentCustomer;
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HoldPickup([Bind(Include = "holdPickupStart, holdPickupEnd")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(customer);
+        }
     }
 }
