@@ -176,9 +176,7 @@ namespace TrashCollectorProject.Controllers
                     }
                     else if (model.UserRoles == "Customer")
                     {
-                        //return RedirectToAction("Edit", "Customers");
-                        return RedirectToAction("Edit", "Edit", new { id = User.Identity.GetUserId() });
-                        //return RedirectToAction("Index", "Customers");
+                        return RedirectToAction("Create", "Customers");
                     }
                     return RedirectToAction("Index", "Home");
                 }

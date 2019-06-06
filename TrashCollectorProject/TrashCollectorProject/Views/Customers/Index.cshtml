@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrashCollectorProject.Models.Customer>
+﻿@model TrashCollectorProject.Models.Customer
 
 @{
     ViewBag.Title = "Index";
@@ -35,40 +35,38 @@
         </th>
         <th></th>
     </tr>
-    @Html.ActionLink("Edit", "Edit", "Customers") |
-    @Html.ActionLink("Details", "Details", "Customers") |
-    @Html.ActionLink("Delete", "Delete", "Customers") |
-    @Html.ActionLink("SpecialPickup", "SpecialPickup", "Customers") |
-    @Html.ActionLink("HoldPickup", "HoldPickup", "Customers") |
-    @Html.ActionLink("Hold Pick up", "HoldPickup", "Customers") |
-    @Html.ActionLink("Budget", "Budget", "Customers")
-    @*<tr>
-        <td>
-            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.emailAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.zipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.weeklyPickupDay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.specialOneTimePickup)
-        </td>
-        <td>*@
 
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.emailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.address)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.zipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.weeklyPickupDay)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.specialOneTimePickup)
+        </td>
+        <td></td>
+    </tr>
 
-    @*</td>
-        </tr>
-        }*@
 
 </table>
+@Html.ActionLink("Edit", "Edit", "Customers") |
+@Html.ActionLink("Details", "Details", "Customers") |
+@Html.ActionLink("Delete", "Delete", "Customers") |
+@Html.ActionLink("SpecialPickup", "SpecialPickup", "Customers") |
+@Html.ActionLink("HoldPickup", "HoldPickup", "Customers") |
+@Html.ActionLink("Hold Pick up", "HoldPickup", "Customers") |
+@Html.ActionLink("Budget", "Budget", "Customers")

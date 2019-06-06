@@ -27,13 +27,12 @@ namespace TrashCollectorProject.Controllers
         }
 
         // GET: Customers/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Find(id);
+
+            string currentId = User.Identity.GetUserId();
+
+            Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -52,12 +51,11 @@ namespace TrashCollectorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipCode,weeklyPickupDay,specialOneTimePickup")] Customer customer)
+        public ActionResult Create(Customer customer)
         {
             if (ModelState.IsValid)
             {
                 string currentId = User.Identity.GetUserId();
-                //db.Customers.SingleOrDefault(m => m.UserId == currentId);
 
                 db.Customers.Add(customer);
                 customer.UserId = currentId;
@@ -69,7 +67,7 @@ namespace TrashCollectorProject.Controllers
         }
 
         // GET: Customers/Edit/5
-        public ActionResult Edit(/*int? id*/)
+        public ActionResult Edit()
         {
             /*if (id == null)
             {
@@ -77,7 +75,6 @@ namespace TrashCollectorProject.Controllers
             }*/
             string currentId = User.Identity.GetUserId();
 
-            //Customer customer = db.Customers.Find(currentId);
             Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
             if (customer == null)
             {
@@ -96,6 +93,8 @@ namespace TrashCollectorProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(customer).State = EntityState.Modified;
+                string currentId = User.Identity.GetUserId();
+                customer.UserId = currentId;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -103,13 +102,12 @@ namespace TrashCollectorProject.Controllers
         }
 
         // GET: Customers/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Find(id);
+
+            string currentId = User.Identity.GetUserId();
+
+            Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -127,35 +125,10 @@ namespace TrashCollectorProject.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-        // GET: Customers/Edit/5
-        public ActionResult HoldPickup(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            //int customersId = db.Customers.Where(c => c.UserId == currentId).Select(db.Customers.id);
-            //var customersId = db.Customers.Single(m => m.UserId == currentId);
-            //Customer customer = db.Customers.Find(customersId);
-
-            //USER ID IS STILL NULL
-
-            //playerInDB.FirstName = player.FirstName;
-            //playerInDB.LastName = player.LastName;
-            //playerInDB.TeamId = player.TeamId;
-            //playerInDB.Teams = _context.Teams.ToList();
-            //_context.SaveChanges();
-
+        
+        // GET: Customers/HoldPickup/5
+        public ActionResult HoldPickup()
+        {            
             string currentId = User.Identity.GetUserId();
             Customer customer = db.Customers.SingleOrDefault(m => m.UserId == currentId);
             if (customer == null)
@@ -168,7 +141,7 @@ namespace TrashCollectorProject.Controllers
         // POST: Customers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult HoldPickup([Bind(Include = "holdPickupStart, holdPickupEnd")] Customer customer)
+        public ActionResult HoldPickup(Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -177,6 +150,55 @@ namespace TrashCollectorProject.Controllers
                 return RedirectToAction("Index");
             }
             return View(customer);
+        }
+        // GET: Customers/SpecialPickup/5
+        public ActionResult SpecialPickup()
+        {
+            string currentId = User.Identity.GetUserId();
+            Customer customer = db.Customers.SingleOrDefault(m => m.UserId == currentId);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customers/SpecialPickup/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SpecialPickup(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(customer);
+        }
+        // GET: Customers/Budget/5
+        public ActionResult Budget()
+        {
+
+            string currentId = User.Identity.GetUserId();
+
+            Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
