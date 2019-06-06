@@ -18,9 +18,12 @@ namespace TrashCollectorProject.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            Customer customer = new Customer();
-          
-            return View(db.Customers.ToList());
+            string currentId = User.Identity.GetUserId();
+
+            //Customer customer = db.Customers.Find(currentId);
+            Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
+
+            return View(customer);
         }
 
         // GET: Customers/Details/5
@@ -53,7 +56,11 @@ namespace TrashCollectorProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                string currentId = User.Identity.GetUserId();
+                //db.Customers.SingleOrDefault(m => m.UserId == currentId);
+
                 db.Customers.Add(customer);
+                customer.UserId = currentId;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -62,15 +69,16 @@ namespace TrashCollectorProject.Controllers
         }
 
         // GET: Customers/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(/*int? id*/)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            }*/
             string currentId = User.Identity.GetUserId();
-            
-            Customer customer = db.Customers.Find(id);
+
+            //Customer customer = db.Customers.Find(currentId);
+            Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -135,11 +143,11 @@ namespace TrashCollectorProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            string currentId = User.Identity.GetUserId();
+
             //int customersId = db.Customers.Where(c => c.UserId == currentId).Select(db.Customers.id);
             //var customersId = db.Customers.Single(m => m.UserId == currentId);
             //Customer customer = db.Customers.Find(customersId);
-            var currentCustomer = db.Customers.Single(m => m.UserId == currentId);
+
             //USER ID IS STILL NULL
 
             //playerInDB.FirstName = player.FirstName;
@@ -147,7 +155,9 @@ namespace TrashCollectorProject.Controllers
             //playerInDB.TeamId = player.TeamId;
             //playerInDB.Teams = _context.Teams.ToList();
             //_context.SaveChanges();
-            Customer customer = currentCustomer;
+
+            string currentId = User.Identity.GetUserId();
+            Customer customer = db.Customers.SingleOrDefault(m => m.UserId == currentId);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -156,8 +166,6 @@ namespace TrashCollectorProject.Controllers
         }
 
         // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HoldPickup([Bind(Include = "holdPickupStart, holdPickupEnd")] Customer customer)

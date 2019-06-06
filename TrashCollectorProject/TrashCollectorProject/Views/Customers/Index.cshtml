@@ -35,41 +35,40 @@
         </th>
         <th></th>
     </tr>
+    @Html.ActionLink("Edit", "Edit", "Customers") |
+    @Html.ActionLink("Details", "Details", "Customers") |
+    @Html.ActionLink("Delete", "Delete", "Customers") |
+    @Html.ActionLink("SpecialPickup", "SpecialPickup", "Customers") |
+    @Html.ActionLink("HoldPickup", "HoldPickup", "Customers") |
+    @Html.ActionLink("Hold Pick up", "HoldPickup", "Customers") |
+    @Html.ActionLink("Budget", "Budget", "Customers")
+    @*<tr>
+        <td>
+            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.zipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.weeklyPickupDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.specialOneTimePickup)
+        </td>
+        <td>*@
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.firstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.lastName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.emailAddress)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.address)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.zipCode)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.weeklyPickupDay)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.specialOneTimePickup)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-        @Html.ActionLink("SpecialPickup", "SpecialPickup", new { id = item.Id }) |
-        @Html.ActionLink("HoldPickup", "HoldPickup", new { id = item.Id }) |
-        @*@Html.ActionLink("Hold Pick up", "HoldPickup", "Customers", new { id = User.Identity.GetUserId() })*@
-        @Html.ActionLink("Budget", "Budget", new { id = item.Id }) 
 
-    </td>
-</tr>
-}
+    @*</td>
+        </tr>
+        }*@
 
 </table>
