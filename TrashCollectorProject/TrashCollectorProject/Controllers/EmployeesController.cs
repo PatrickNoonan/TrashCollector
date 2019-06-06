@@ -23,9 +23,7 @@ namespace TrashCollectorProject.Controllers
             string currentId = User.Identity.GetUserId();
             Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
 
-
             var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == today ).ToList();
-
 
             return View(customers);
         }
@@ -33,7 +31,6 @@ namespace TrashCollectorProject.Controllers
         // GET: /Details/5
         public ActionResult Details()
         {
-
             string currentId = User.Identity.GetUserId();
 
             Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
@@ -125,6 +122,39 @@ namespace TrashCollectorProject.Controllers
             db.Employees.Remove(employee);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET:
+        public ActionResult ConfirmPickup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //string currentId = User.Identity.GetUserId();
+
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmPickup( Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                customer.weeklyPickupConfirmed = true;
+                customer.Bill += 10;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(customer);
         }
 
         protected override void Dispose(bool disposing)

@@ -3,7 +3,7 @@ namespace TrashCollectorProject.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class thing : DbMigration
+    public partial class thing1 : DbMigration
     {
         public override void Up()
         {
@@ -19,6 +19,11 @@ namespace TrashCollectorProject.Migrations
                         zipCode = c.String(),
                         weeklyPickupDay = c.String(),
                         specialOneTimePickup = c.String(),
+                        holdPickUpStart = c.String(),
+                        holdPickUpEnd = c.String(),
+                        Bill = c.Double(),
+                        weeklyPickupConfirmed = c.Boolean(nullable: false),
+                        specialPickupConfirmed = c.Double(nullable: false),
                         UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -90,13 +95,14 @@ namespace TrashCollectorProject.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         firstName = c.String(),
                         lastName = c.String(),
-                        emailAddress = c.String(),
-                        address = c.String(),
                         zipCode = c.String(),
-                        routeStartingPoint = c.String(),
-                        routeEndingPoint = c.String(),
+                        city = c.String(),
+                        state = c.String(),
+                        UserId = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -113,11 +119,13 @@ namespace TrashCollectorProject.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Employees", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Customers", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Employees", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });

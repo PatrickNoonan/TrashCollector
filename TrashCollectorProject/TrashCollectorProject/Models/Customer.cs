@@ -40,7 +40,16 @@ namespace TrashCollectorProject.Models
         public string holdPickUpEnd { get; set; }
 
         [Display(Name = "Bill")]
-        public string bill { get; set; }
+        public double Bill { get; set; }
+
+        [Display(Name = "Weekly Pickup Confirmed")]
+        public bool weeklyPickupConfirmed { get; set; }
+
+        [Display(Name = "Special Pickup Confirmed")]
+        public bool specialPickupConfirmed { get; set; }
+
+        //[Display(Name = "Was Picked Up")]
+        //public bool wasPickedup { get; set; }
 
         [Display(Name = "User Id")]
         [ForeignKey("ApplicationUser")]

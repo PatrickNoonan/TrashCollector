@@ -7,10 +7,12 @@ namespace TrashCollectorProject.Migrations
     {
         public override void Up()
         {
+            AlterColumn("dbo.Customers", "specialPickupConfirmed", c => c.Boolean(nullable: false));
         }
         
         public override void Down()
         {
+            AlterColumn("dbo.Customers", "specialPickupConfirmed", c => c.Double(nullable: false));
         }
     }
 }

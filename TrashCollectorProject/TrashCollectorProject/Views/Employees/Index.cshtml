@@ -7,7 +7,7 @@
 
 <h2>Employee Home Page</h2>
 
-<h3>Today trash pickups in my area (by zip code)</h3>
+<h3>Todays trash pickups in my area (by zip code)</h3>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        @Html.ActionLink("Todays Pickups", "FilterToday", "Employees") |
+        @Html.ActionLink("Todays Pickups", "Index", "Employees") |
         @Html.ActionLink("Filter by day", "FilterByDay", "Employees")
         @foreach (var item in Model)
         {
@@ -23,7 +23,7 @@
             <td>@Html.ActionLink(item.firstName, "Details", "Customers", new { id = item.Id }, null)</td>
             <td>@Html.ActionLink(item.lastName, "Details", "Customers", new { id = item.Id }, null)</td>
             <td>@Html.ActionLink(item.address, "Details", "Customers", new { id = item.Id }, null)</td>
-            <td>@Html.ActionLink("Confirm Pickup", "Confirm", "Employees")</td>
+            <td>@Html.ActionLink("Confirm Pickup", "ConfirmPickup", "Employees", new { id = item.Id }, null)</td>
         </tr>
         }
     </tbody>

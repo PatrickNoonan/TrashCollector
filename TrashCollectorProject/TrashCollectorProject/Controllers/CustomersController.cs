@@ -29,7 +29,6 @@ namespace TrashCollectorProject.Controllers
         // GET: Customers/Details/5
         public ActionResult Details()
         {
-
             string currentId = User.Identity.GetUserId();
 
             Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
@@ -104,7 +103,6 @@ namespace TrashCollectorProject.Controllers
         // GET: Customers/Delete/5
         public ActionResult Delete()
         {
-
             string currentId = User.Identity.GetUserId();
 
             Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
@@ -179,7 +177,6 @@ namespace TrashCollectorProject.Controllers
         // GET: Customers/Budget/5
         public ActionResult Budget()
         {
-
             string currentId = User.Identity.GetUserId();
 
             Customer customer = db.Customers.FirstOrDefault(x => x.UserId == currentId);
@@ -189,8 +186,6 @@ namespace TrashCollectorProject.Controllers
             }
             return View(customer);
         }
-
-
 
         protected override void Dispose(bool disposing)
         {

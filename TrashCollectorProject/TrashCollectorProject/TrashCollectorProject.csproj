@@ -177,25 +177,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906051936465_thing.cs" />
-    <Compile Include="Migrations\201906051936465_thing.Designer.cs">
-      <DependentUpon>201906051936465_thing.cs</DependentUpon>
+    <Compile Include="Migrations\201906062117277_thing1.cs" />
+    <Compile Include="Migrations\201906062117277_thing1.Designer.cs">
+      <DependentUpon>201906062117277_thing1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906051940488_thing2.cs" />
-    <Compile Include="Migrations\201906051940488_thing2.Designer.cs">
-      <DependentUpon>201906051940488_thing2.cs</DependentUpon>
+    <Compile Include="Migrations\201906062148325_thing2.cs" />
+    <Compile Include="Migrations\201906062148325_thing2.Designer.cs">
+      <DependentUpon>201906062148325_thing2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906052103118_thing3.cs" />
-    <Compile Include="Migrations\201906052103118_thing3.Designer.cs">
-      <DependentUpon>201906052103118_thing3.cs</DependentUpon>
+    <Compile Include="Migrations\201906062238028_thing3.cs" />
+    <Compile Include="Migrations\201906062238028_thing3.Designer.cs">
+      <DependentUpon>201906062238028_thing3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906052157178_thing4.cs" />
-    <Compile Include="Migrations\201906052157178_thing4.Designer.cs">
-      <DependentUpon>201906052157178_thing4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061547375_thing5.cs" />
-    <Compile Include="Migrations\201906061547375_thing5.Designer.cs">
-      <DependentUpon>201906061547375_thing5.cs</DependentUpon>
+    <Compile Include="Migrations\201906062240380_thing4.cs" />
+    <Compile Include="Migrations\201906062240380_thing4.Designer.cs">
+      <DependentUpon>201906062240380_thing4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -280,6 +276,8 @@
     <Content Include="Views\Customers\SpecialPickup.cshtml" />
     <Content Include="Views\Customers\HoldPickup.cshtml" />
     <Content Include="Views\Customers\Budget.cshtml" />
+    <Content Include="Views\Employees\FilterByDay.cshtml" />
+    <Content Include="Views\Employees\ConfirmPickup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -298,20 +296,17 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201906051936465_thing.resx">
-      <DependentUpon>201906051936465_thing.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906062117277_thing1.resx">
+      <DependentUpon>201906062117277_thing1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906051940488_thing2.resx">
-      <DependentUpon>201906051940488_thing2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906062148325_thing2.resx">
+      <DependentUpon>201906062148325_thing2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906052103118_thing3.resx">
-      <DependentUpon>201906052103118_thing3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906062238028_thing3.resx">
+      <DependentUpon>201906062238028_thing3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906052157178_thing4.resx">
-      <DependentUpon>201906052157178_thing4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061547375_thing5.resx">
-      <DependentUpon>201906061547375_thing5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906062240380_thing4.resx">
+      <DependentUpon>201906062240380_thing4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

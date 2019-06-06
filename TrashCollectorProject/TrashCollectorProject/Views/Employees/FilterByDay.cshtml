@@ -1,0 +1,30 @@
+﻿@{@model IEnumerable<TrashCollectorProject.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Employee Home Page</h2>
+
+<h3>Trash pickups in my area (by zip code)</h3>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Customer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.ActionLink("Todays Pickups", "Index", "Employees") |
+        @Html.ActionLink("Filter by day", "FilterByDay", "Employees")
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.firstName, "Details", "Customers", new { id = item.Id }, null)</td>
+                <td>@Html.ActionLink(item.lastName, "Details", "Customers", new { id = item.Id }, null)</td>
+                <td>@Html.ActionLink(item.address, "Details", "Customers", new { id = item.Id }, null)</td>
+                <td>@Html.ActionLink("Confirm Pickup", "Confirm", "Employees")</td>
+            </tr>
+        }
+    </tbody>
+</table>
