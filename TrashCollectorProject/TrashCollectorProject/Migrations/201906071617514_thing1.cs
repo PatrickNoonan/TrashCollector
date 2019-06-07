@@ -16,14 +16,16 @@ namespace TrashCollectorProject.Migrations
                         lastName = c.String(),
                         emailAddress = c.String(),
                         address = c.String(),
+                        latitude = c.Double(nullable: false),
+                        longitude = c.Double(nullable: false),
                         zipCode = c.String(),
                         weeklyPickupDay = c.String(),
                         specialOneTimePickup = c.String(),
                         holdPickUpStart = c.String(),
                         holdPickUpEnd = c.String(),
-                        Bill = c.Double(),
+                        Bill = c.Double(nullable: false),
                         weeklyPickupConfirmed = c.Boolean(nullable: false),
-                        specialPickupConfirmed = c.Double(nullable: false),
+                        specialPickupConfirmed = c.Boolean(nullable: false),
                         UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)

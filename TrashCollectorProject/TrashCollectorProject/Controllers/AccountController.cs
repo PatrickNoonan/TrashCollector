@@ -20,7 +20,7 @@ namespace TrashCollectorProject.Controllers
 
         ApplicationDbContext context;
         public AccountController()
-        {
+        {            
             context = new ApplicationDbContext();
         }
 

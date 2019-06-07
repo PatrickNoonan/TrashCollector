@@ -19,6 +19,7 @@ namespace TrashCollectorProject.Controllers
         public ActionResult Index(string weekDayString)
         {
             List<SelectListItem> weekDays = new List<SelectListItem>();
+            SelectListItem Today = new SelectListItem() { Text = "Today", Value = "0", Selected = true };
             SelectListItem Sunday = new SelectListItem() { Text = "Sunday", Value = "1", Selected = true };
             SelectListItem Monday = new SelectListItem() { Text = "Monday", Value = "2", Selected = true };
             SelectListItem Tuesday = new SelectListItem() { Text = "Tuesday", Value = "3", Selected = true };
@@ -26,24 +27,26 @@ namespace TrashCollectorProject.Controllers
             SelectListItem Thursday = new SelectListItem() { Text = "Thursday", Value = "5", Selected = true };
             SelectListItem Friday = new SelectListItem() { Text = "Friday", Value = "6", Selected = true };
             SelectListItem Saturday = new SelectListItem() { Text = "Saturday", Value = "7", Selected = true };
-            weekDays.Add(Sunday); weekDays.Add(Monday); weekDays.Add(Tuesday); weekDays.Add(Wednesday); weekDays.Add(Thursday); weekDays.Add(Friday); weekDays.Add(Saturday);
+            weekDays.Add(Today); weekDays.Add(Sunday); weekDays.Add(Monday); weekDays.Add(Tuesday); weekDays.Add(Wednesday); weekDays.Add(Thursday); weekDays.Add(Friday); weekDays.Add(Saturday);
 
-            if (weekDayString != null)
+            if (weekDayString == "Today")
             {
-                weekDays.Where(i => i.Value == weekDayString).First().Selected = true;
+
+                //weekDays.Where(i => i.Value == weekDayString).First().Selected = true;
+
             }
 
             ViewBag.DaysOfWeek = weekDays;
 
-            
-            //var players = _context.Players.Include(m => m.Team).ToList();
             string today = System.DateTime.Now.DayOfWeek.ToString();
             string currentId = User.Identity.GetUserId();
             Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
 
-            var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == today ).ToList();
+            var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == today).ToList();
 
             return View(customers);
+
+
         }
 
         // GET: Employees/Edit/5
@@ -202,6 +205,28 @@ namespace TrashCollectorProject.Controllers
             }
             return View(customer);
         }
+        public ActionResult GoogleMapsAPI(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult GoogleMapsAPI(Customer customer)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(customer).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(customer);
+        //}
 
         protected override void Dispose(bool disposing)
         {

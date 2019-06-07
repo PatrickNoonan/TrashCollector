@@ -24,6 +24,12 @@ namespace TrashCollectorProject.Models
         [Display(Name = "Address")]
         public string address { get; set; }
 
+        [Display(Name = "Latitude")]
+        public double latitude { get; set; }
+
+        [Display(Name = "Longitude")]
+        public double longitude { get; set; }
+
         [Display(Name = "Zip Code")]
         public string zipCode { get; set; }
 
