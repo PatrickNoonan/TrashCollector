@@ -15,8 +15,7 @@ namespace TrashCollectorProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Employees
-        public ActionResult Index(string weekDayString)
+        public void ListOfDays()
         {
             List<SelectListItem> weekDays = new List<SelectListItem>();
             SelectListItem Today = new SelectListItem() { Text = "Today", Value = "0", Selected = true };
@@ -29,54 +28,37 @@ namespace TrashCollectorProject.Controllers
             SelectListItem Saturday = new SelectListItem() { Text = "Saturday", Value = "7", Selected = true };
             weekDays.Add(Today); weekDays.Add(Sunday); weekDays.Add(Monday); weekDays.Add(Tuesday); weekDays.Add(Wednesday); weekDays.Add(Thursday); weekDays.Add(Friday); weekDays.Add(Saturday);
 
-            if (weekDayString == "Today")
-            {
 
-                //weekDays.Where(i => i.Value == weekDayString).First().Selected = true;
 
-            }
+            //List<string> weekDays = new List<string>();
+            //weekDays.Add("Monday");
+            //weekDays.Add("Tuesday");
+            //weekDays.Add("Wednesday");
+            //weekDays.Add("Thursday");
+            //weekDays.Add("Friday");
+            //weekDays.Add("Saturday");
+            //weekDays.Add("Sunday");
 
             ViewBag.DaysOfWeek = weekDays;
-
+        }
+       
+        public ActionResult Index(string dayOfWeek)
+        {
             string today = System.DateTime.Now.DayOfWeek.ToString();
+
+            if (dayOfWeek == null)
+            {
+                dayOfWeek = today;
+            }
+            
             string currentId = User.Identity.GetUserId();
             Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
 
-            var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == today).ToList();
+            var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == dayOfWeek).ToList();
 
             return View(customers);
-
-
         }
 
-        // GET: Employees/Edit/5
-        //public ActionResult FilterByDay()
-        //{
-        //    string today = "weekDay";
-        //    Employee employee = db.Employees.Find(id);
-        //    if (employee == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(today);
-        //}
-
-        //// POST: Employees/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult FilterByDay(string weekday)
-        //{
-        //    //var players = _context.Players.Include(m => m.Team).ToList();
-
-        //    string currentId = User.Identity.GetUserId();
-        //    Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
-
-        //    var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == today).ToList();
-
-        //    return View(customers);
-        //}
-
-        // GET: /Details/5
         public ActionResult Details()
         {
             string currentId = User.Identity.GetUserId();
@@ -89,15 +71,11 @@ namespace TrashCollectorProject.Controllers
             return View(employee);
         }
 
-        // GET: Customers/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Employee employee)
@@ -115,7 +93,6 @@ namespace TrashCollectorProject.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -130,9 +107,6 @@ namespace TrashCollectorProject.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipcode,weeklyPickupDay,specialOneTimePickup")] Employee employee)
@@ -146,7 +120,6 @@ namespace TrashCollectorProject.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -161,7 +134,6 @@ namespace TrashCollectorProject.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -172,7 +144,6 @@ namespace TrashCollectorProject.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET:
         public ActionResult ConfirmPickup(int? id)
         {
             if (id == null)
@@ -189,11 +160,9 @@ namespace TrashCollectorProject.Controllers
             return View(customer);
         }
 
-        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmPickup( Customer customer)
-        //[Bind(Include = "Id,firstName,lastName,emailAddress,address,zipcode,weeklyPickupDay,specialOneTimePickup")]
         {
             if (ModelState.IsValid)
             {
@@ -214,19 +183,6 @@ namespace TrashCollectorProject.Controllers
             }
             return View(customer);
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult GoogleMapsAPI(Customer customer)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(customer).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(customer);
-        //}
 
         protected override void Dispose(bool disposing)
         {
