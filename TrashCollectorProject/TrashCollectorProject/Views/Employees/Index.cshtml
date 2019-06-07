@@ -17,6 +17,9 @@
     <tbody>
         @Html.ActionLink("Todays Pickups", "Index", "Employees") |
         @Html.ActionLink("Filter by day", "FilterByDay", "Employees")
+        @Html.DropDownList("DaysOfWeek", null, new
+   { onchange = "document.location.href='/Employees/Index?value='+this.value;" });
+
         @foreach (var item in Model)
         {
         <tr>

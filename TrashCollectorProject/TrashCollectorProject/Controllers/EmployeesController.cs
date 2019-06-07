@@ -16,8 +16,26 @@ namespace TrashCollectorProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Employees
-        public ActionResult Index()
+        public ActionResult Index(string weekDayString)
         {
+            List<SelectListItem> weekDays = new List<SelectListItem>();
+            SelectListItem Sunday = new SelectListItem() { Text = "Sunday", Value = "1", Selected = true };
+            SelectListItem Monday = new SelectListItem() { Text = "Monday", Value = "2", Selected = true };
+            SelectListItem Tuesday = new SelectListItem() { Text = "Tuesday", Value = "3", Selected = true };
+            SelectListItem Wednesday = new SelectListItem() { Text = "Wednesday", Value = "4", Selected = true };
+            SelectListItem Thursday = new SelectListItem() { Text = "Thursday", Value = "5", Selected = true };
+            SelectListItem Friday = new SelectListItem() { Text = "Friday", Value = "6", Selected = true };
+            SelectListItem Saturday = new SelectListItem() { Text = "Saturday", Value = "7", Selected = true };
+            weekDays.Add(Sunday); weekDays.Add(Monday); weekDays.Add(Tuesday); weekDays.Add(Wednesday); weekDays.Add(Thursday); weekDays.Add(Friday); weekDays.Add(Saturday);
+
+            if (weekDayString != null)
+            {
+                weekDays.Where(i => i.Value == weekDayString).First().Selected = true;
+            }
+
+            ViewBag.DaysOfWeek = weekDays;
+
+            
             //var players = _context.Players.Include(m => m.Team).ToList();
             string today = System.DateTime.Now.DayOfWeek.ToString();
             string currentId = User.Identity.GetUserId();
@@ -27,6 +45,33 @@ namespace TrashCollectorProject.Controllers
 
             return View(customers);
         }
+
+        // GET: Employees/Edit/5
+        //public ActionResult FilterByDay()
+        //{
+        //    string today = "weekDay";
+        //    Employee employee = db.Employees.Find(id);
+        //    if (employee == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(today);
+        //}
+
+        //// POST: Employees/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult FilterByDay(string weekday)
+        //{
+        //    //var players = _context.Players.Include(m => m.Team).ToList();
+
+        //    string currentId = User.Identity.GetUserId();
+        //    Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
+
+        //    var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == today).ToList();
+
+        //    return View(customers);
+        //}
 
         // GET: /Details/5
         public ActionResult Details()
@@ -145,6 +190,7 @@ namespace TrashCollectorProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmPickup( Customer customer)
+        //[Bind(Include = "Id,firstName,lastName,emailAddress,address,zipcode,weeklyPickupDay,specialOneTimePickup")]
         {
             if (ModelState.IsValid)
             {
