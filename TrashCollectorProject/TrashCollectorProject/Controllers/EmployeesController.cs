@@ -27,9 +27,7 @@ namespace TrashCollectorProject.Controllers
             //SelectListItem Friday = new SelectListItem() { Text = "Friday", Value = "6", Selected = true };
             //SelectListItem Saturday = new SelectListItem() { Text = "Saturday", Value = "7", Selected = true };
             //weekDays.Add(Today); weekDays.Add(Sunday); weekDays.Add(Monday); weekDays.Add(Tuesday); weekDays.Add(Wednesday); weekDays.Add(Thursday); weekDays.Add(Friday); weekDays.Add(Saturday);
-
-
-
+                       
             List<string> weekDays = new List<string>();
             weekDays.Add("Monday");
             weekDays.Add("Tuesday");
@@ -39,7 +37,7 @@ namespace TrashCollectorProject.Controllers
             weekDays.Add("Saturday");
             weekDays.Add("Sunday");
 
-            ViewBag.DaysOfWeek = weekDays;
+            //ViewBag.DaysOfWeek = weekDays;
         }
        
         public ActionResult Index(string dayOfWeek)
@@ -182,6 +180,37 @@ namespace TrashCollectorProject.Controllers
                 return HttpNotFound();
             }
             return View(customer);
+        }
+
+        public ActionResult MapAllDailyStops(List<Customer> customerList)
+        {
+            //List<Customer> customerList = new List<Customer>();
+
+            //foreach (int id in ids)
+            //{
+            //    Customer customer = db.Customers.Find(id);
+
+            //    if (customer == null)
+            //    {
+            //        return HttpNotFound();
+            //    }
+            //    customerList.Add(customer);
+            //}
+            int customerListLength = customerList.Count;
+            int[] latsArray = new int[customerListLength];
+            int[] longsArray = new int[customerListLength];
+
+            for ( int i = 0; i < customerListLength; i++)
+            {
+                latsArray[i] = Convert.ToInt16(customerList[i].latitude);
+                longsArray[i] = Convert.ToInt16(customerList[i].longitude);
+            }
+
+            ViewBag.latBag = latsArray;
+            ViewBag.longBag = longsArray;
+            ViewBag.bagLength = customerListLength;
+
+            return View(customerList);
         }
 
         protected override void Dispose(bool disposing)

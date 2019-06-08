@@ -1,0 +1,119 @@
+﻿@model IEnumerable<TrashCollectorProject.Models.Customer>
+
+@{
+    ViewBag.Title = "MapAllDailyStops";
+}
+
+    <head>
+        <style>
+            #map {
+                height: 400px;
+                width: 100%;
+            }
+        </style>
+        <script ajax defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9VqyRQ0U9jrBEYpymyq1xB5zzGsnbLnc&callback=initMap">
+        </script>
+    </head>
+
+<h2>Map All Daily Stops</h2>
+
+<body>
+    <h3>Customer pick up locations</h3>
+
+    <div id="map"></div>
+
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+        </script>
+        <script type="text/javascript">
+            function initMap() {
+                var center = new google.maps.LatLng(35, -100);
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 3,
+                    center: center,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+                let latArray = @Html.Raw(Json.Encode(@ViewBag.latBag));
+                let longArray = @Html.Raw(Json.Encode(@ViewBag.longBag));
+                let bagLengthNum = @Html.Raw(Json.Encode(@ViewBag.bagLength));
+
+                var markers = [];
+                for (var i = 0; i < bagLengthNum; i++) {
+                    let latL = latArray[i];
+                    let longL = longArray[i];
+                    let coords = new google.maps.LatLng(latL,
+                        longL);
+                    let marker = new google.maps.Marker({
+                        position: coords
+                    });
+                    markers.push(marker);
+                }
+                var markerCluster = new MarkerClusterer(map, markers);
+                google.maps.event.addDomListener(window, 'load', initMap);
+            }
+            
+        </script>
+
+    @*<script type="text/javascript">
+        function initMap() {
+        
+            //var locations = [
+            //    ['Bondi Beach', -33.890542, 151.274856, 4],
+            //    ['Coogee Beach', -33.923036, 151.259052, 5],
+            //    ['Cronulla Beach', -34.028249, 151.157507, 3],
+            //    ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+            //    ['Maroubra Beach', -33.950198, 151.259302, 1]
+            //];
+            //var markers = [];
+            //        for (var i = 0; i < bagLengthNum; i++) {
+            //            let latL = latArray[i];
+            //            let longL = longArray[i];
+            //            let coords = new google.maps.LatLng(latL,
+            //                longL);
+            //            let marker = new google.maps.Marker({
+            //                position: coords
+            //            });
+            //            markers.push(marker);
+            //        }
+            let latArray = @Html.Raw(Json.Encode(@ViewBag.latBag));
+            let longArray = @Html.Raw(Json.Encode(@ViewBag.longBag));
+            let bagLengthNum = @Html.Raw(Json.Encode(@ViewBag.bagLength));
+
+            let locations = [];
+
+            for (let i = 0; i < bagLengthNum; i++) {
+                let latL = latArray[i];
+                let longL = longArray[i];
+                let coordMark = [latL, longL];
+
+                locations.push(coordMark);
+        }
+
+        
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: new google.maps.LatLng(-33.92, 151.25),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                    map: map
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+        }
+    </script>*@
+</body>
+
