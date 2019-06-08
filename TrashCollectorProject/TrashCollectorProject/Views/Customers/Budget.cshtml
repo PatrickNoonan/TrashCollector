@@ -9,17 +9,24 @@
 <div>
     <h4>Customer</h4>
     <hr />
-    @*<dl class="dl-horizontal">
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Bill)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Bill)
-            @Html.ActionLink("Pay Bill through paypal", "GoogleMapsAPI", "Employees", new { id = item.Id }, null)
+
         </dd>
-    </dl>*@
+    </dl>
+        <div class="col-4" id="payPalButtons">
+        </div>
+
 </div>
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+<script>paypal.Buttons().render('#payPalButtons');</script>
