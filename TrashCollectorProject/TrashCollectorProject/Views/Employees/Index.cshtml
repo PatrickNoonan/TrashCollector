@@ -37,12 +37,13 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@Html.ActionLink(item.firstName, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
-                <td>@Html.ActionLink(item.lastName, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
-                <td>@Html.ActionLink(item.address, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
-                <td>@Html.ActionLink("Confirm Pickup", "ConfirmPickup", "Employees", new { id = item.Id }, null)</td>
-            </tr>
+        <tr>
+            <td>@Html.ActionLink(item.firstName, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
+            <td>@Html.DisplayForModel(item.firstName)
+            <td>@Html.ActionLink(item.lastName, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
+            <td>@Html.ActionLink(item.address, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
+            <td>@Html.ActionLink("Confirm Pickup", "ConfirmPickup", "Employees", new { id = item.Id }, null)</td>
+        </tr>
         }
     </tbody>
 </table>

@@ -121,9 +121,17 @@ namespace TrashCollectorProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult HoldPickup(Customer customer)
         {
+            string todaysDateString = DateTime.Now.ToString("MM/dd/yyyy");
+            var todaysDateVar = DateTime.Parse(todaysDateString);
+            var holdStart = DateTime.Parse(customer.holdPickUpStart);
+            var holdEnd = DateTime.Parse(customer.holdPickUpEnd);
             if (ModelState.IsValid)
             {
                 db.Entry(customer).State = EntityState.Modified;
+                if (todaysDateVar > holdStart && todaysDateVar < holdEnd)
+                {
+                    customer.onHold = true;
+                }
                 db.SaveChanges();
 
                 return RedirectToAction("Index");

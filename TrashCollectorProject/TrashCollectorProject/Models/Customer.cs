@@ -45,6 +45,9 @@ namespace TrashCollectorProject.Models
         [Display(Name = "Hold Pickup End Day")]
         public string holdPickUpEnd { get; set; }
 
+        [Display(Name = "Pickups on hold")]
+        public bool onHold { get; set; }
+
         [Display(Name = "Bill")]
         public double Bill { get; set; }
 

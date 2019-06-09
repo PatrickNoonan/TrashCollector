@@ -55,16 +55,28 @@ namespace TrashCollectorProject.Controllers
         {
             string currentId = User.Identity.GetUserId();
             Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
+
             return employee;
+        }
+
+        public List<Customer> CustomersToDisplay(string dayOfWeek)
+        {
+            FindDay(dayOfWeek);
+            Employee employee = GetCurrentEmployee();
+            List<Customer> customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == selectedDay && c.weeklyPickupConfirmed == false && c.onHold == false ).ToList();
+            List<Customer> customersToAdd = db.Customers.Where(c => c.zipCode == employee.zipCode && c.specialOneTimePickup == selectedDay && c.specialPickupConfirmed == false).ToList();
+            foreach (Customer item in customersToAdd)
+            {
+                customers.Add(item);
+            }
+            return customers;
         }
 
         [Authorize(Roles = "Employee")]
         public ActionResult Index(string dayOfWeek)
         {
-            FindDay(dayOfWeek);
-            Employee employee = GetCurrentEmployee();
-            var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == selectedDay).ToList();
-
+            List<Customer> customers = CustomersToDisplay(dayOfWeek);
+            
             return View(customers);
         }
 
@@ -75,7 +87,6 @@ namespace TrashCollectorProject.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(employee);
         }
 
@@ -174,10 +185,17 @@ namespace TrashCollectorProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(customer).State = EntityState.Modified;
-                customer.weeklyPickupConfirmed = true;
-                customer.Bill += 10;
+                if (customer.weeklyPickupDay == selectedDay && customer.weeklyPickupConfirmed == false)
+                {
+                    customer.weeklyPickupConfirmed = true;
+                    customer.Bill += 10;
+                }
+                else if (customer.specialOneTimePickup == selectedDay && customer.specialPickupConfirmed == false)
+                {
+                    customer.specialPickupConfirmed = true;
+                    customer.Bill += 20;
+                }
                 db.SaveChanges();
-
                 return RedirectToAction("Index");
             }
             return View(customer);
