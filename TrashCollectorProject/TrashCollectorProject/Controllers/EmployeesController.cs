@@ -14,6 +14,7 @@ namespace TrashCollectorProject.Controllers
     public class EmployeesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        public string selectedDay = System.DateTime.Now.DayOfWeek.ToString();
 
         public void ListOfDays()
         {
@@ -39,33 +40,42 @@ namespace TrashCollectorProject.Controllers
 
             //ViewBag.DaysOfWeek = weekDays;
         }
-       
-        public ActionResult Index(string dayOfWeek)
+
+        public void FindDay(string dayOfWeek)
         {
             string today = System.DateTime.Now.DayOfWeek.ToString();
-
+            selectedDay = dayOfWeek;
             if (dayOfWeek == null)
             {
-                dayOfWeek = today;
+                selectedDay = today;
             }
-            
+        }
+
+        public Employee GetCurrentEmployee()
+        {
             string currentId = User.Identity.GetUserId();
             Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
+            return employee;
+        }
 
-            var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == dayOfWeek).ToList();
+        [Authorize(Roles = "Employee")]
+        public ActionResult Index(string dayOfWeek)
+        {
+            FindDay(dayOfWeek);
+            Employee employee = GetCurrentEmployee();
+            var customers = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == selectedDay).ToList();
 
             return View(customers);
         }
 
         public ActionResult Details()
         {
-            string currentId = User.Identity.GetUserId();
-
-            Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
+            Employee employee = GetCurrentEmployee();
             if (employee == null)
             {
                 return HttpNotFound();
             }
+
             return View(employee);
         }
 
@@ -81,13 +91,12 @@ namespace TrashCollectorProject.Controllers
             if (ModelState.IsValid)
             {
                 string currentId = User.Identity.GetUserId();
-
                 db.Employees.Add(employee);
                 employee.UserId = currentId;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
             return View(employee);
         }
 
@@ -113,6 +122,7 @@ namespace TrashCollectorProject.Controllers
             {
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(employee);
@@ -139,6 +149,7 @@ namespace TrashCollectorProject.Controllers
             Employee employee = db.Employees.Find(id);
             db.Employees.Remove(employee);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -148,8 +159,6 @@ namespace TrashCollectorProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //string currentId = User.Identity.GetUserId();
-
             Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
@@ -168,6 +177,7 @@ namespace TrashCollectorProject.Controllers
                 customer.weeklyPickupConfirmed = true;
                 customer.Bill += 10;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -182,25 +192,13 @@ namespace TrashCollectorProject.Controllers
             return View(customer);
         }
 
-        public ActionResult MapAllDailyStops(List<Customer> customerList)
+        public void coordsViewBagMaker(List<Customer> customerList)
         {
-            //List<Customer> customerList = new List<Customer>();
-
-            //foreach (int id in ids)
-            //{
-            //    Customer customer = db.Customers.Find(id);
-
-            //    if (customer == null)
-            //    {
-            //        return HttpNotFound();
-            //    }
-            //    customerList.Add(customer);
-            //}
             int customerListLength = customerList.Count;
             int[] latsArray = new int[customerListLength];
             int[] longsArray = new int[customerListLength];
 
-            for ( int i = 0; i < customerListLength; i++)
+            for (int i = 0; i < customerListLength; i++)
             {
                 latsArray[i] = Convert.ToInt16(customerList[i].latitude);
                 longsArray[i] = Convert.ToInt16(customerList[i].longitude);
@@ -209,6 +207,13 @@ namespace TrashCollectorProject.Controllers
             ViewBag.latBag = latsArray;
             ViewBag.longBag = longsArray;
             ViewBag.bagLength = customerListLength;
+        }
+
+        public ActionResult MapAllDailyStops()
+        {
+            Employee employee = GetCurrentEmployee();
+            var customerList = db.Customers.Where(c => c.zipCode == employee.zipCode && c.weeklyPickupDay == selectedDay).ToList();
+            coordsViewBagMaker(customerList);            
 
             return View(customerList);
         }
