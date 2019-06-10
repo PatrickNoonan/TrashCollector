@@ -1,0 +1,71 @@
+﻿
+body {
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    left: 0px;
+    top: 0px;
+    z-index: -1000;
+    overflow: hidden;
+}
+
+video#bgVideo {
+    min-height: 100%;
+    min-width:100%;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#CompanyLogo {
+    width: 75%;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+#homeNav{
+    margin-right:30px;
+}
+
+#homeNav li {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#NeonButton {
+    font-family: 'Roboto Slab', serif;
+    color: white;
+    font-size: 30px;
+}
+
+#setting {
+    font-family: 'Roboto Slab', serif;
+    color: white;
+    font-size: 15px;
+}

@@ -1,15 +1,23 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/HomeSite.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab&effect=neon" rel="stylesheet">
 <div class="container">
     <video id="bgVideo" autoplay loop muted>
         <source src="../Media/ChicagoAtNight.mp4" type="video/mp4">
     </video>
-    <img id="#CompanyText" src="../Media/DumpsterDiversText.png" alt="transparent company text">
 </div>
-<ul id="homeNav" class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+<div class="row">
+    <ul id ="homeNav" class="nav navbar-nav navbar-right">
+        <li id="NeonButton" class="font-effect-neon neon">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li id="NeonButton" class="font-effect-neon neon">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
-
+    </div>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <img class="center" id="CompanyLogo" src="../Media/TrashCollectorLogo3.png" alt="transparent company text">
+    </div>
+    <div class="col-1"></div>
+</div>
