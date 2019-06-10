@@ -276,6 +276,7 @@
     <Content Include="Views\Employees\GoogleMapsAPI.cshtml" />
     <Content Include="Views\Employees\MapAllDailyStops.cshtml" />
     <Content Include="Views\Employees\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

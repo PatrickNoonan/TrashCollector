@@ -5,11 +5,10 @@
 }
 
 
-<h2>Customer Home Page</h2>
+<h2>@Html.DisplayFor(model=>model.firstName)'s Home Page</h2>
+<br />
+<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -17,9 +16,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.lastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.emailAddress)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.address)
@@ -44,9 +40,6 @@
             @Html.DisplayFor(model => model.lastName)
         </td>
         <td>
-            @Html.DisplayFor(model => model.emailAddress)
-        </td>
-        <td>
             @Html.DisplayFor(model => model.address)
         </td>
         <td>
@@ -60,13 +53,7 @@
         </td>
         <td></td>
     </tr>
-
-
-</table>
+  </table>
 @Html.ActionLink("Edit", "Edit", "Customers") |
 @Html.ActionLink("Details", "Details", "Customers") |
-@Html.ActionLink("Delete", "Delete", "Customers") |
-@Html.ActionLink("SpecialPickup", "SpecialPickup", "Customers") |
-@Html.ActionLink("HoldPickup", "HoldPickup", "Customers") |
-@Html.ActionLink("Hold Pick up", "HoldPickup", "Customers") |
-@Html.ActionLink("Budget", "Budget", "Customers")
+@Html.ActionLink("Delete", "Delete", "Customers") 
