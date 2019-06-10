@@ -46,7 +46,7 @@ video#bgVideo {
 #CompanyLogo {
     width: 75%;
     border-radius: 50%;
-    animation: pulse 2s infinite;
+    animation: pulse 4s infinite;
 }
 
 #homeNav{

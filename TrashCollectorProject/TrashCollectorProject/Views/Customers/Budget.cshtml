@@ -7,11 +7,11 @@
 <h2>Budget</h2>
 
 <div>
-    <h4>Customer</h4>
+    <h4>@Html.DisplayFor(model => model.firstName)'s bill</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Bill)
+            <p>Current Balance: </p>
         </dt>
 
         <dd>
@@ -19,13 +19,17 @@
 
         </dd>
     </dl>
+    <br/>
+    <br/>
+    <div class="container">
         <div class="col-4" id="payPalButtons">
         </div>
+    </div>
 
 </div>
 
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to landing", "Index")
 </p>
 
 <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>

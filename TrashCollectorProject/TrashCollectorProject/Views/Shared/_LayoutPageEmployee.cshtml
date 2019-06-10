@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Customers")</li>
                     <li>@Html.ActionLink("SpecialPickup", "SpecialPickup", "Customers")</li>
                     <li>@Html.ActionLink("Hold Pick up", "HoldPickup", "Customers")</li>
                     <li>@Html.ActionLink("Budget", "Budget", "Customers")</li>
@@ -31,10 +31,14 @@
         </div>
     </div>
     <div class="container body-content">
+        <video id="bgVideo" autoplay loop muted>
+            <source src="../Media/whiteVideoBackground.mp4" type="video/mp4">
+        </video>
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Garbage Collector</p>
+
+        <footer id="footerDuh">
+
+            <p>&copy; @DateTime.Now.Year - Dumpster Divers LLC</p>
         </footer>
     </div>
 
