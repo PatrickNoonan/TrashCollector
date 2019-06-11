@@ -3,17 +3,20 @@
 }
 <link href="~/Content/HomeSite.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&effect=neon" rel="stylesheet">
+
+<div class="row navRow">
+    <ul id="homeNav" class="nav navbar-nav navbar-right">
+        @*<li id="NeonButton" class="font-effect-neon neon">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li id="NeonButton" class="font-effect-neon neon">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+        <li id="NeonButton" class="font-effect-neon neon">@Html.Partial("_LoginPartial")</li>
+        @*@Html.Partial("_LoginPartial")*@
+    </ul>
+</div>
 <div class="container">
     <video id="bgVideo" autoplay loop muted>
         <source src="../Media/ChicagoAtNight.mp4" type="video/mp4">
     </video>
 </div>
-<div class="row">
-    <ul id ="homeNav" class="nav navbar-nav navbar-right">
-        <li id="NeonButton" class="font-effect-neon neon">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li id="NeonButton" class="font-effect-neon neon">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-    </div>
 <div class="row">
     <div class="col-1"></div>
     <div class="col-10">

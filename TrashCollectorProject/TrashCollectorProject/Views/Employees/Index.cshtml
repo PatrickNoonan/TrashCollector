@@ -8,45 +8,47 @@
 <h2>Employee Home Page</h2>
 
 <h3>Todays trash pickups in my area (by zip code)</h3>
+
+@Html.ActionLink("Todays Pickups", "Index", "Employees") |
+<br />
+
+
+@*@Html.ActionLink("Filter by day", "FilterByDay", "Employees")*@
+
+@*@Html.DropDownList("DaysOfWeek", (List<SelectListItem>)ViewBag.DaysOfWeek)*@
+
+@*@Html.DropDownList("DaysOfWeek", "Index", new { dayOfWeek = this.value });*@
+
+
+@Html.ActionLink("Sunday", "Index", new { DayofWeek = "Sunday" }) |
+@Html.ActionLink("Monday", "Index", new { DayofWeek = "Monday" }) |
+@Html.ActionLink("Tuesday", "Index", new { DayofWeek = "Tuesday" }) |
+@Html.ActionLink("Wednesday", "Index", new { DayofWeek = "Wednesday" }) |
+@Html.ActionLink("Thursday", "Index", new { DayofWeek = "Thursday" }) |
+@Html.ActionLink("Friday", "Index", new { DayofWeek = "Friday" }) |
+@Html.ActionLink("Saturday", "Index", new { DayofWeek = "Saturday" })
+<br />
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>Customer</th>
+            <th>Customers</th>
         </tr>
     </thead>
     <tbody>
-        @Html.ActionLink("Todays Pickups", "Index", "Employees") |
-        </br>
-        
 
-        @*@Html.ActionLink("Filter by day", "FilterByDay", "Employees")*@
-
-        @*@Html.DropDownList("DaysOfWeek", (List<SelectListItem>)ViewBag.DaysOfWeek)*@
-
-        @*@Html.DropDownList("DaysOfWeek", "Index", new { dayOfWeek = this.value });*@
-
-
-        @Html.ActionLink("Sunday", "Index", new { DayofWeek = "Sunday" })
-        @Html.ActionLink("Monday", "Index", new { DayofWeek = "Monday" })
-        @Html.ActionLink("Tuesday", "Index", new { DayofWeek = "Tuesday" })
-        @Html.ActionLink("Wednesday", "Index", new { DayofWeek = "Wednesday" })
-        @Html.ActionLink("Thursday", "Index", new { DayofWeek = "Thursday" })
-        @Html.ActionLink("Friday", "Index", new { DayofWeek = "Friday" })
-        @Html.ActionLink("Saturday", "Index", new { DayofWeek = "Saturday" })
 
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@Html.ActionLink(item.firstName, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
-            <td>@Html.DisplayForModel(item.firstName)
-            <td>@Html.ActionLink(item.lastName, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
-            <td>@Html.ActionLink(item.address, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
-            <td>@Html.ActionLink("Confirm Pickup", "ConfirmPickup", "Employees", new { id = item.Id }, null)</td>
-        </tr>
+            <tr>
+                <td>@item.firstName</td>
+                <td>@item.lastName</td>
+                <td>@Html.ActionLink(item.address, "GoogleMapsAPI", "Employees", new { id = item.Id }, null)</td>
+                <td>@Html.ActionLink("Confirm Pickup", "ConfirmPickup", "Employees", new { id = item.Id }, null)</td>
+            </tr>
         }
     </tbody>
 </table>
 
-@Html.ActionLink("Show all stops on map", "MapAllDailyStops", "Employees")
+@Html.ActionLink("Show all of todays stops on map", "MapAllDailyStops", "Employees")
 

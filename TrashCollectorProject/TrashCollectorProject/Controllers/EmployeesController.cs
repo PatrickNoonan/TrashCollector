@@ -111,13 +111,11 @@ namespace TrashCollectorProject.Controllers
             return View(employee);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employees.Find(id);
+            string currentId = User.Identity.GetUserId();
+            Employee employee = db.Employees.FirstOrDefault(x => x.UserId == currentId);
+           
             if (employee == null)
             {
                 return HttpNotFound();
@@ -127,7 +125,7 @@ namespace TrashCollectorProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipcode,weeklyPickupDay,specialOneTimePickup")] Employee employee)
+        public ActionResult Edit([Bind(Include = "firstName,lastName,zipCode,city,state")] Employee employee)
         {
             if (ModelState.IsValid)
             {
