@@ -12,12 +12,7 @@
 @Html.ActionLink("Todays Pickups", "Index", "Employees") |
 <br />
 
-
-@*@Html.ActionLink("Filter by day", "FilterByDay", "Employees")*@
-
-@*@Html.DropDownList("DaysOfWeek", (List<SelectListItem>)ViewBag.DaysOfWeek)*@
-
-@*@Html.DropDownList("DaysOfWeek", "Index", new { dayOfWeek = this.value });*@
+@*@Html.DropDownList("WeekDays", (List<SelectListItem>)ViewBag.WeekDays)*@
 
 
 @Html.ActionLink("Sunday", "Index", new { DayofWeek = "Sunday" }) |
@@ -35,9 +30,6 @@
         </tr>
     </thead>
     <tbody>
-
-
-
         @foreach (var item in Model)
         {
             <tr>

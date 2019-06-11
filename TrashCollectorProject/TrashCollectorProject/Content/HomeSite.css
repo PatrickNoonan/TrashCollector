@@ -46,6 +46,7 @@ video#bgVideo {
 #CompanyLogo {
     border-radius: 50%;
     animation: pulse 4s infinite;
+    /*width: 90%;*/
 }
 
 .row {

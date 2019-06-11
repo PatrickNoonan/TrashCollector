@@ -17,18 +17,16 @@ namespace TrashCollectorProject.Controllers
         public string selectedDay = System.DateTime.Now.DayOfWeek.ToString();
 
         public void ListOfDays()
-        {
-            //List<SelectListItem> weekDays = new List<SelectListItem>();
-            //SelectListItem Today = new SelectListItem() { Text = "Today", Value = "0", Selected = true };
-            //SelectListItem Sunday = new SelectListItem() { Text = "Sunday", Value = "1", Selected = true };
-            //SelectListItem Monday = new SelectListItem() { Text = "Monday", Value = "2", Selected = true };
-            //SelectListItem Tuesday = new SelectListItem() { Text = "Tuesday", Value = "3", Selected = true };
-            //SelectListItem Wednesday = new SelectListItem() { Text = "Wednesday", Value = "4", Selected = true };
-            //SelectListItem Thursday = new SelectListItem() { Text = "Thursday", Value = "5", Selected = true };
-            //SelectListItem Friday = new SelectListItem() { Text = "Friday", Value = "6", Selected = true };
-            //SelectListItem Saturday = new SelectListItem() { Text = "Saturday", Value = "7", Selected = true };
-            //weekDays.Add(Today); weekDays.Add(Sunday); weekDays.Add(Monday); weekDays.Add(Tuesday); weekDays.Add(Wednesday); weekDays.Add(Thursday); weekDays.Add(Friday); weekDays.Add(Saturday);
-                       
+        {           
+            //SelectListItem Sunday = new SelectListItem() { Text = "Sunday", Value = "Sunday", Selected = true };
+            //SelectListItem Monday = new SelectListItem() { Text = "Monday", Value = "Monday", Selected = true };
+            //SelectListItem Tuesday = new SelectListItem() { Text = "Tuesday", Value = "Tuesday", Selected = true };
+            //SelectListItem Wednesday = new SelectListItem() { Text = "Wednesday", Value = "Wednesday", Selected = true };
+            //SelectListItem Thursday = new SelectListItem() { Text = "Thursday", Value = "Thursday", Selected = true };
+            //SelectListItem Friday = new SelectListItem() { Text = "Friday", Value = "Friday", Selected = true };
+            //SelectListItem Saturday = new SelectListItem() { Text = "Saturday", Value = "Saturday", Selected = true };
+            //List<SelectListItem> weekDays = new List<SelectListItem>() { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
+
             List<string> weekDays = new List<string>();
             weekDays.Add("Monday");
             weekDays.Add("Tuesday");
@@ -38,7 +36,7 @@ namespace TrashCollectorProject.Controllers
             weekDays.Add("Saturday");
             weekDays.Add("Sunday");
 
-            //ViewBag.DaysOfWeek = weekDays;
+            ViewBag.WeekDays = weekDays;
         }
 
         public void FindDay(string dayOfWeek)
