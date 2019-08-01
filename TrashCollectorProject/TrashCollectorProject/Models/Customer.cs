@@ -57,13 +57,9 @@ namespace TrashCollectorProject.Models
         [Display(Name = "Special Pickup Confirmed")]
         public bool specialPickupConfirmed { get; set; }
 
-        //[Display(Name = "Was Picked Up")]
-        //public bool wasPickedup { get; set; }
-
         [Display(Name = "User Id")]
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-
     }
 }
