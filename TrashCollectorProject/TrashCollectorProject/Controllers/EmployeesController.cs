@@ -17,16 +17,7 @@ namespace TrashCollectorProject.Controllers
         public string selectedDay = System.DateTime.Now.DayOfWeek.ToString();
 
         public void ListOfDays()
-        {           
-            //SelectListItem Sunday = new SelectListItem() { Text = "Sunday", Value = "Sunday", Selected = true };
-            //SelectListItem Monday = new SelectListItem() { Text = "Monday", Value = "Monday", Selected = true };
-            //SelectListItem Tuesday = new SelectListItem() { Text = "Tuesday", Value = "Tuesday", Selected = true };
-            //SelectListItem Wednesday = new SelectListItem() { Text = "Wednesday", Value = "Wednesday", Selected = true };
-            //SelectListItem Thursday = new SelectListItem() { Text = "Thursday", Value = "Thursday", Selected = true };
-            //SelectListItem Friday = new SelectListItem() { Text = "Friday", Value = "Friday", Selected = true };
-            //SelectListItem Saturday = new SelectListItem() { Text = "Saturday", Value = "Saturday", Selected = true };
-            //List<SelectListItem> weekDays = new List<SelectListItem>() { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
-
+        {    
             List<string> weekDays = new List<string>();
             weekDays.Add("Monday");
             weekDays.Add("Tuesday");
