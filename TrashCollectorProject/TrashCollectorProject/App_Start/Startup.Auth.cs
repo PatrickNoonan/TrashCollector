@@ -48,6 +48,10 @@ namespace TrashCollectorProject
                 clientId: "",
                 clientSecret: "");
 
+            app.UseTwitterAuthentication(
+               consumerKey: "",
+               consumerSecret: "");
+
             
         }
     }
