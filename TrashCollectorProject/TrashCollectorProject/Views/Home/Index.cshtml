@@ -6,10 +6,7 @@
 
 <div class="row navRow">
     <ul id="homeNav" class="nav navbar-nav navbar-right">
-        @*<li id="NeonButton" class="font-effect-neon neon">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li id="NeonButton" class="font-effect-neon neon">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
         <li id="NeonButton" class="font-effect-neon neon">@Html.Partial("_LoginPartial")</li>
-        @*@Html.Partial("_LoginPartial")*@
     </ul>
 </div>
 <div class="container">
