@@ -52,7 +52,11 @@ namespace TrashCollectorProject
                consumerKey: "",
                consumerSecret: "");
 
-            
+            app.UseFacebookAuthentication(
+               appId: "",
+               appSecret: "");
+
+           
         }
     }
 }
